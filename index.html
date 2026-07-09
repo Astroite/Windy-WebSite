@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Windborne · 风信来客 — 卡通天气壁纸与天象收集</title>
+    <meta
+      name="description"
+      content="Windborne 风信来客：自绘卡通风格的实时天气壁纸，粉彩底图、风粒子动画、实时台风路径，以及 215 种随真实天气造访的天象访客与轻量放置收集玩法。"
+    />
+    <meta property="og:title" content="Windborne · 风信来客" />
+    <meta
+      property="og:description"
+      content="实时天气壁纸 + 215 种天象访客收集。粉彩剪纸风，克制治愈，不遮挡桌面。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/art/og.jpg" />
+    <meta name="theme-color" content="#cfe8f3" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="css/site.css" />
+  </head>
+  <body>
+    <!-- ============ NAV ============ -->
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">
+          <span class="mark">🌤️</span>
+          <span>Windborne<span style="color: var(--ink-soft); font-weight: 600">·风信来客</span></span>
+        </a>
+        <nav class="nav-links">
+          <a href="#features" data-lang-zh>特色</a><a href="#features" data-lang-en>Features</a>
+          <a href="#visitors" data-lang-zh>天象访客</a><a href="#visitors" data-lang-en>Visitors</a>
+          <a href="#weather" data-lang-zh>实时天气</a><a href="#weather" data-lang-en>Live Weather</a>
+          <a href="#collect" data-lang-zh>收集玩法</a><a href="#collect" data-lang-en>Collection</a>
+          <a href="#download" data-lang-zh>获取</a><a href="#download" data-lang-en>Get it</a>
+        </nav>
+        <button class="lang-toggle" id="langToggle" type="button">EN / 中</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- ============ HERO ============ -->
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <h1>
+              <span class="zh-name" data-lang-zh>风信来客</span>
+              <span class="zh-name" data-lang-en>Windborne</span>
+            </h1>
+            <p class="tagline">
+              <span data-lang-zh>会呼吸的天气壁纸，与漂过屏幕的天象访客</span>
+              <span data-lang-en>A living weather wallpaper, and the sky-visitors that drift across it</span>
+            </p>
+            <p class="lead">
+              <span data-lang-zh>
+                自绘卡通风格的实时天气桌面壁纸：粉彩底图、流动的风粒子、真实台风路径。天空会随你所在城市的
+                真实天气，迎来 215 种剪纸质感的「天象访客」——云、彩虹、极光、日晕、流星与光柱。克制、缓慢、不遮挡桌面。
+              </span>
+              <span data-lang-en>
+                A hand-drawn live weather wallpaper: pastel maps, flowing wind particles, real typhoon
+                tracks. As the real weather of your city changes, 215 papercraft "sky-visitors" drift
+                by — clouds, rainbows, auroras, halos, meteors and light pillars. Calm, slow, never in the way.
+              </span>
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#download">
+                <span data-lang-zh>🎐 立即获取</span><span data-lang-en>🎐 Get Windborne</span>
+              </a>
+              <a class="btn btn-ghost" href="#visitors">
+                <span data-lang-zh>看看天象访客</span><span data-lang-en>Meet the visitors</span>
+              </a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat">
+                <b>215</b><span data-lang-zh>种天象访客</span><span data-lang-en>sky-visitors</span>
+              </div>
+              <div class="stat">
+                <b>20+</b><span data-lang-zh>全球区域预设</span><span data-lang-en>region presets</span>
+              </div>
+              <div class="stat">
+                <b>3</b><span data-lang-zh>端共用一份渲染</span><span data-lang-en>platforms, one engine</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-art">
+            <div class="frame" id="heroFrame">
+              <!-- hero art injected by JS if available; otherwise a live collage of real sprites -->
+              <div class="hero-collage" id="heroCollage"></div>
+            </div>
+            <div class="hero-badge">
+              <span data-lang-zh>✦ 每一次天气，都有客来访</span>
+              <span data-lang-en>✦ Every weather brings a guest</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FEATURES ============ -->
+      <section class="section" id="features">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <span class="eyebrow" data-lang-zh>特色</span><span class="eyebrow" data-lang-en>Features</span>
+            <h2>
+              <span data-lang-zh>桌面上的一小片天空</span><span data-lang-en>A small sky on your desktop</span>
+            </h2>
+            <p>
+              <span data-lang-zh>真实数据驱动，全部由 canvas 自绘，不内嵌任何网站。</span>
+              <span data-lang-en>Driven by real data, drawn entirely on canvas — no embedded website.</span>
+            </p>
+          </div>
+
+          <div class="feature-grid">
+            <div class="card reveal">
+              <div class="ico">🗺️</div>
+              <h3><span data-lang-zh>粉彩卡通地图</span><span data-lang-en>Pastel cartoon map</span></h3>
+              <p>
+                <span data-lang-zh>只保留海陆边界的墨线海岸，无国界、无杂讯；风速、降雨、温度可切换填色图层。</span>
+                <span data-lang-en>Ink coastlines only — no borders, no clutter. Switchable wind, rain and temperature color layers.</span>
+              </p>
+            </div>
+            <div class="card reveal">
+              <div class="ico">🌀</div>
+              <h3><span data-lang-zh>实时风与台风</span><span data-lang-en>Live wind &amp; typhoons</span></h3>
+              <p>
+                <span data-lang-zh>流动的风粒子动画，实时台风历史 + 预报路径、强度分级图标，粒子围绕风暴旋转。</span>
+                <span data-lang-en>Flowing wind particles, live typhoon history + forecast tracks, category icons, particles swirling around storms.</span>
+              </p>
+            </div>
+            <div class="card reveal">
+              <div class="ico">✦</div>
+              <h3><span data-lang-zh>215 种天象访客</span><span data-lang-en>215 sky-visitors</span></h3>
+              <p>
+                <span data-lang-zh>云、彩虹、极光、日晕、流星、光柱……随真实天气造访屏幕，全部剪纸拼贴质感。</span>
+                <span data-lang-en>Clouds, rainbows, auroras, halos, meteors, light pillars — all papercraft, appearing with the real weather.</span>
+              </p>
+            </div>
+            <div class="card reveal">
+              <div class="ico">🌱</div>
+              <h3><span data-lang-zh>轻量放置收集</span><span data-lang-en>Gentle collection</span></h3>
+              <p>
+                <span data-lang-zh>记录第一次相遇的天象，养一片小小的牧场生态。零强制、零惩罚。</span>
+                <span data-lang-en>Log your first sighting of each phenomenon and tend a tiny ranch. No pressure, no penalties.</span>
+              </p>
+            </div>
+            <div class="card reveal">
+              <div class="ico">🌏</div>
+              <h3><span data-lang-zh>全球区域预设</span><span data-lang-en>Worldwide presets</span></h3>
+              <p>
+                <span data-lang-zh>世界总览、洲际、海盆、东亚细分，或自定义经纬度与缩放，城市名中英可切换。</span>
+                <span data-lang-en>Global, continents, ocean basins, East Asia detail, or custom coordinates. City labels in 中文 or English.</span>
+              </p>
+            </div>
+            <div class="card reveal">
+              <div class="ico">🪶</div>
+              <h3><span data-lang-zh>克制又省电</span><span data-lang-en>Light &amp; unobtrusive</span></h3>
+              <p>
+                <span data-lang-zh>低对比、缓慢、不遮挡桌面内容；仅粒子层逐帧动画，数据默认每 30 分钟刷新。</span>
+                <span data-lang-en>Low-contrast and slow; only the particle layer animates. Data refreshes every 30 min by default.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ VISITORS GALLERY ============ -->
+      <section class="section" id="visitors" style="background: rgba(255, 255, 255, 0.28)">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <span class="eyebrow" data-lang-zh>天象访客 · 主角</span><span class="eyebrow" data-lang-en>The visitors · centerpiece</span>
+            <h2>
+              <span data-lang-zh>215 种天象，等你一一相遇</span>
+              <span data-lang-en>215 sky phenomena, one sighting at a time</span>
+            </h2>
+            <p>
+              <span data-lang-zh
+                >从常见的漂流云到极品的流星华，每一种都由撕边纸张层叠而成。稀有度越高，出现得越难得。</span
+              >
+              <span data-lang-en
+                >From a common drifting cloud to an epic meteor corona — each one layered from torn paper. The rarer the tier, the rarer the sighting.</span
+              >
+            </p>
+          </div>
+
+          <div class="showcase-banner reveal">
+            <img src="assets/art/visitor-showcase.jpg" alt="剪纸质感的天象访客标本卡 / Papercraft sky-visitor specimen cards" loading="lazy" />
+          </div>
+
+          <div class="gallery-controls reveal" id="galleryControls">
+            <button class="filter-btn" data-filter="all" aria-pressed="true">
+              <span data-lang-zh>全部 <b id="cnt-all">215</b></span><span data-lang-en>All <b>215</b></span>
+            </button>
+            <button class="filter-btn" data-filter="common" aria-pressed="false">
+              <span class="dot dot-common"></span><span data-lang-zh>普通天象</span><span data-lang-en>Common</span>
+            </button>
+            <button class="filter-btn" data-filter="rare" aria-pressed="false">
+              <span class="dot dot-rare"></span><span data-lang-zh>稀有天象</span><span data-lang-en>Rare</span>
+            </button>
+            <button class="filter-btn" data-filter="epic" aria-pressed="false">
+              <span class="dot dot-epic"></span><span data-lang-zh>极品天象</span><span data-lang-en>Epic</span>
+            </button>
+          </div>
+
+          <div class="visitor-grid" id="visitorGrid" aria-live="polite"></div>
+
+          <div class="gallery-more">
+            <button class="btn btn-ghost" id="showMore" type="button">
+              <span data-lang-zh>展开全部 215 种 ▾</span><span data-lang-en>Show all 215 ▾</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ WEATHER SPLIT ============ -->
+      <section class="section" id="weather">
+        <div class="wrap split">
+          <div class="split-media reveal" id="weatherMedia">
+            <img src="assets/art/preview.jpg" alt="实时卡通天气地图 / Live cartoon weather map" loading="lazy" />
+          </div>
+          <div class="split-copy reveal">
+            <span class="eyebrow" data-lang-zh>实时天气</span><span class="eyebrow" data-lang-en>Live weather</span>
+            <h2>
+              <span data-lang-zh>天气是真的，所以访客也是</span>
+              <span data-lang-en>The weather is real — so are the visitors</span>
+            </h2>
+            <p>
+              <span data-lang-zh
+                >壁纸读取你所在区域的真实气象快照：风场、降雨、温度、台风。天象访客的出现条件与这份数据绑定——
+                下雨时才有雨带与雷雨云，强风区才起风线，雨转晴的瞬间才可能挂起彩虹。</span
+              >
+              <span data-lang-en
+                >The wallpaper reads a real weather snapshot for your region — wind, rain, temperature,
+                cyclones. Each visitor is bound to that data: showers and thunderclouds appear only in
+                rain, wind streaks in gales, and a rainbow only in the moment rain turns to clear.</span
+              >
+            </p>
+            <ul class="tick-list">
+              <li>
+                <span data-lang-zh>数据来源 Open-Meteo / NOAA GFS，台风来自 GDACS</span>
+                <span data-lang-en>Data from Open-Meteo / NOAA GFS; cyclones from GDACS</span>
+              </li>
+              <li>
+                <span data-lang-zh>局部降雨、强风、雨区边界都会影响访客在何处现身</span>
+                <span data-lang-en>Local rain, wind and rain-edge zones decide where a visitor shows up</span>
+              </li>
+              <li>
+                <span data-lang-zh>断网也不崩：地图与城市照常渲染，缓存数据带「旧数据」标记自动重试</span>
+                <span data-lang-en>Offline-safe: map and cities still render; cached data is marked "stale" and retried</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ COLLECTION SPLIT ============ -->
+      <section class="section" id="collect" style="background: rgba(255, 255, 255, 0.28)">
+        <div class="wrap split reverse">
+          <div class="split-media reveal" id="ranchMedia">
+            <div class="hero-collage" style="aspect-ratio: 4/3">
+              <span style="font-size: 60px">🌱</span>
+            </div>
+          </div>
+          <div class="split-copy reveal">
+            <span class="eyebrow" data-lang-zh>收集玩法</span><span class="eyebrow" data-lang-en>Collection</span>
+            <h2>
+              <span data-lang-zh>相遇，记录，然后慢慢养一片天空</span>
+              <span data-lang-en>Meet them, log them, grow a little sky</span>
+            </h2>
+            <p>
+              <span data-lang-zh
+                >第一次记录到某种天象时，屏幕角落会浮起一行轻轻的提示。收藏册会记下你见过的每一种，
+                稀有度分为普通、稀有、极品三档。</span
+              >
+              <span data-lang-en
+                >The first time a phenomenon is sighted, a soft toast rises in the corner. Your collection
+                logs every kind you've met, across three rarity tiers — common, rare and epic.</span
+              >
+            </p>
+            <ul class="tick-list">
+              <li>
+                <span data-lang-zh><b>60</b> 种普通 · <b>90</b> 种稀有 · <b>65</b> 种极品</span>
+                <span data-lang-en><b>60</b> common · <b>90</b> rare · <b>65</b> epic</span>
+              </li>
+              <li>
+                <span data-lang-zh>拖放式的小牧场：把喜欢的生态摆在桌面上慢慢成长</span>
+                <span data-lang-en>A drag-and-drop ranch: place ecosystems on your desktop and watch them grow</span>
+              </li>
+              <li>
+                <span data-lang-zh>零强制交互、零惩罚——它只是安静地陪着你</span>
+                <span data-lang-en>No forced interaction, no penalties — it just keeps you quiet company</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ REGIONS ============ -->
+      <section class="section" id="regions" style="padding: 72px 0">
+        <div class="wrap">
+          <div class="section-head reveal" style="margin-bottom: 30px">
+            <h2 style="font-size: clamp(24px, 3vw, 32px)">
+              <span data-lang-zh>把天空定在你想看的地方</span>
+              <span data-lang-en>Point the sky wherever you like</span>
+            </h2>
+          </div>
+          <div class="chip-row reveal">
+            <span class="chip" data-lang-zh>世界总览</span><span class="chip" data-lang-en>World</span>
+            <span class="chip" data-lang-zh>东亚</span><span class="chip" data-lang-en>East Asia</span>
+            <span class="chip" data-lang-zh>南海</span><span class="chip" data-lang-en>South China Sea</span>
+            <span class="chip" data-lang-zh>香港</span><span class="chip" data-lang-en>Hong Kong</span>
+            <span class="chip" data-lang-zh>台湾</span><span class="chip" data-lang-en>Taiwan</span>
+            <span class="chip" data-lang-zh>日本</span><span class="chip" data-lang-en>Japan</span>
+            <span class="chip" data-lang-zh>西太平洋</span><span class="chip" data-lang-en>West Pacific</span>
+            <span class="chip" data-lang-zh>北大西洋</span><span class="chip" data-lang-en>North Atlantic</span>
+            <span class="chip" data-lang-zh>地中海</span><span class="chip" data-lang-en>Mediterranean</span>
+            <span class="chip" data-lang-zh>欧洲</span><span class="chip" data-lang-en>Europe</span>
+            <span class="chip" data-lang-zh>北美</span><span class="chip" data-lang-en>North America</span>
+            <span class="chip" data-lang-zh>大洋洲</span><span class="chip" data-lang-en>Oceania</span>
+            <span class="chip" data-lang-zh>自定义坐标</span><span class="chip" data-lang-en>Custom coords</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ DOWNLOAD ============ -->
+      <section class="section" id="download">
+        <div class="wrap">
+          <div class="download-card reveal">
+            <h2><span data-lang-zh>把风信来客带回桌面</span><span data-lang-en>Bring Windborne to your desktop</span></h2>
+            <p>
+              <span data-lang-zh
+                >同一份渲染核心支持 Wallpaper Engine、Steam 桌面版与普通浏览器。Windows 桌面壳可注入壁纸层、托盘常驻与多屏。</span
+              >
+              <span data-lang-en
+                >One rendering core runs on Wallpaper Engine, the Steam desktop build and any browser. The
+                Windows shell injects the wallpaper layer with tray support and multi-monitor.</span
+              >
+            </p>
+            <div class="store-row">
+              <a class="store-btn" href="#" id="steamBtn">
+                <span class="glyph">🎮</span>
+                <span>
+                  <span class="small" data-lang-zh>即将上架</span><span class="small" data-lang-en>Coming soon on</span>
+                  <span class="big">Steam</span>
+                </span>
+              </a>
+              <a class="store-btn" href="#" id="weBtn">
+                <span class="glyph">🖼️</span>
+                <span>
+                  <span class="small" data-lang-zh>创意工坊</span><span class="small" data-lang-en>Workshop</span>
+                  <span class="big">Wallpaper Engine</span>
+                </span>
+              </a>
+              <a class="store-btn" href="https://github.com/Astroite" target="_blank" rel="noopener">
+                <span class="glyph">⌨️</span>
+                <span>
+                  <span class="small" data-lang-zh>源码 / 关注</span><span class="small" data-lang-en>Source / follow</span>
+                  <span class="big">GitHub</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div>
+            <div class="brand"><span class="mark">🌤️</span><span>Windborne · 风信来客</span></div>
+            <p>
+              <span data-lang-zh>自绘卡通风格的实时天气壁纸 + 轻量放置收集玩法。</span>
+              <span data-lang-en>A hand-drawn live weather wallpaper with a gentle collection game.</span>
+            </p>
+          </div>
+          <div class="footer-links">
+            <div class="footer-col">
+              <h4 data-lang-zh>探索</h4><h4 data-lang-en>Explore</h4>
+              <a href="#features" data-lang-zh>特色</a><a href="#features" data-lang-en>Features</a>
+              <a href="#visitors" data-lang-zh>天象访客</a><a href="#visitors" data-lang-en>Visitors</a>
+              <a href="#collect" data-lang-zh>收集玩法</a><a href="#collect" data-lang-en>Collection</a>
+            </div>
+            <div class="footer-col">
+              <h4 data-lang-zh>获取</h4><h4 data-lang-en>Get it</h4>
+              <a href="#download">Steam</a>
+              <a href="#download">Wallpaper Engine</a>
+              <a href="https://github.com/Astroite" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-legal">
+          <p>
+            <span data-lang-zh
+              >数据：Open-Meteo (AWS open data / NOAA GFS) · 台风 GDACS.org (NOAA) · 底图 Natural Earth（public domain）</span
+            >
+            <span data-lang-en
+              >Data: Open-Meteo (AWS open data / NOAA GFS) · Cyclones GDACS.org (NOAA) · Basemap Natural Earth (public domain)</span
+            >
+          </p>
+          <p class="disclaimer">
+            <span data-lang-zh
+              >需要联网。与 windy.com、Open-Meteo、GDACS、Natural Earth 无隶属关系。仅作氛围可视化，
+              不用于紧急、导航、航空、航海等安全攸关决策。</span
+            >
+            <span data-lang-en
+              >Internet required. Not affiliated with windy.com, Open-Meteo, GDACS or Natural Earth. Ambient
+              visualization only — not for emergency, navigation, aviation or maritime decisions.</span
+            >
+          </p>
+          <p>© <span id="year">2026</span> Astroite · Windborne</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/site.js"></script>
+  </body>
+</html>
