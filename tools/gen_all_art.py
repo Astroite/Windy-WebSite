@@ -10,27 +10,22 @@ import gen_image  # noqa: E402
 SITE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ASSETS = os.path.join(SITE, "assets", "art")
 
-# Shared style base — mirrors the wallpaper's cut-paper collage + pastel weather-map look.
+# Shared style base — mirrors the wallpaper's cut-paper collage + pastel weather look.
 STYLE = (
     "手工剪纸拼贴风格（cut-paper collage / papercraft），层叠撕边纸张纹理，"
     "柔和粉彩色调：奶油纸色 #fff8df、粉蓝海面 #cfe8f3、薄荷风区 #d8ecd1、暖黄 #f3e3a7、"
     "淡紫 #a88bd9，墨蓝色描边 #344653，克制低对比、柔和、宁静治愈的氛围，扁平插画，"
-    "细腻的纸张颗粒与轻微投影，无文字，无水印"
+    "细腻的纸张颗粒与轻微投影，无文字，无水印，无地图、无国界、无行政区线、无可识别地理轮廓"
 )
 
 JOBS = [
     # (filename, width, height, prompt)
     (
         "hero.png", 1600, 1000,
-        "一幅横向宽幅主视觉插画：俯瞰的卡通世界天气地图，粉蓝色海洋与奶油色陆地，"
-        "墨线勾勒的海岸线，地图上方漂浮着多种由剪纸拼贴而成的天象：蓬松的云朵、彩虹、"
-        "极光光带、旋转的台风、光柱与日晕、流动的风线粒子。画面轻盈梦幻，"
-        "留白充足适合叠加标题文字。" + STYLE,
-    ),
-    (
-        "og.png", 1200, 630,
-        "社交分享封面图：中心是一片剪纸拼贴的柔和天气地图与漂浮的云、彩虹、极光天象，"
-        "构图居中平衡，四周留白，适合作为网站分享缩略图。" + STYLE,
+        "一幅横向宽幅主视觉插画：抽象的粉蓝、奶油与淡紫色剪纸天气层次，"
+        "天空漂浮着蓬松的云朵、彩虹、旋转的风涡、光柱与流动风线粒子；"
+        "下半部分是非地理化的抽象纸艺气流、云带与柔和色块，不出现陆地、海岸线或任何地图轮廓。"
+        "画面轻盈梦幻，留白充足适合叠加标题文字。" + STYLE,
     ),
     (
         "visitor-showcase.png", 1200, 900,

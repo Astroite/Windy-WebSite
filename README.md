@@ -12,7 +12,7 @@ css/site.css          设计系统（调色板取自 apps/wallpaper/css/style.cs
 js/site.js            精选画廊渲染、稀有度筛选、中英切换、滚动出现、生成图注入（零依赖）
 data/visitors.json    24 位精选访客的 {id,label,labelEn,rarity,art}，含完整图鉴数量但不公开名录
 assets/visitors/      仅精选访客的代表 sprite（从主项目复制）
-assets/art/           Paper 生成的剪纸风美术：hero / og / visitor-showcase / ranch，及 preview.jpg
+assets/art/           Paper 生成的剪纸风美术：hero / visitor-showcase / ranch，及 preview.jpg
 tools/                构建脚本（见下）
 ```
 
@@ -24,7 +24,7 @@ tools/                构建脚本（见下）
 # 1) 提取公开精选访客元数据 + 复制代表 sprite（读 apps/wallpaper/data/visitors.js）
 python tools/extract_visitors.py
 
-# 2) 用 PaperArt 生成技能重出剪纸风主视觉 / OG / 装饰图（异步，读技能 .env 里的 UAT key）
+# 2) 用 PaperArt 生成技能重出剪纸风主视觉 / 装饰图（异步，读技能 .env 里的 UAT key）
 python tools/gen_all_art.py        # 内部调用 tools/gen_image.py
 ```
 
