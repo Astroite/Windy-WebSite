@@ -598,11 +598,6 @@ img {
   vertical-align: middle;
 }
 
-.gallery-more {
-  text-align: center;
-  margin-top: 30px;
-}
-
 /* ---------- split feature (weather / collection) ---------- */
 .split {
   display: grid;

@@ -94,10 +94,8 @@
     rare: { zh: "稀有", en: "Rare", dot: "dot-rare" },
     epic: { zh: "极品", en: "Epic", dot: "dot-epic" }
   };
-  var COLLAPSED = 24;
-  var allVisitors = [];
+  var showcaseVisitors = [];
   var currentFilter = "all";
-  var expanded = false;
 
   function cardHTML(v) {
     var r = RARITY[v.rarity] || RARITY.common;
@@ -138,17 +136,10 @@
   function renderGallery() {
     var grid = document.getElementById("visitorGrid");
     if (!grid) return;
-    var list = allVisitors.filter(function (v) {
+    var list = showcaseVisitors.filter(function (v) {
       return currentFilter === "all" || v.rarity === currentFilter;
     });
-    var shown = expanded ? list : list.slice(0, COLLAPSED);
-    grid.innerHTML = shown.map(cardHTML).join("");
-
-    var more = document.getElementById("showMore");
-    if (more) {
-      more.style.display = list.length > COLLAPSED ? "" : "none";
-      more.setAttribute("data-expanded", expanded ? "1" : "0");
-    }
+    grid.innerHTML = list.map(cardHTML).join("");
   }
 
   function wireControls() {
@@ -158,33 +149,21 @@
         var btn = e.target.closest ? e.target.closest(".filter-btn") : null;
         if (!btn) return;
         currentFilter = btn.getAttribute("data-filter");
-        expanded = false;
         [].forEach.call(controls.querySelectorAll(".filter-btn"), function (b) {
           b.setAttribute("aria-pressed", b === btn ? "true" : "false");
         });
         renderGallery();
       });
     }
-    var more = document.getElementById("showMore");
-    if (more) {
-      more.addEventListener("click", function () {
-        expanded = !expanded;
-        renderGallery();
-        var zh = more.querySelector("[data-lang-zh]");
-        var en = more.querySelector("[data-lang-en]");
-        if (zh) zh.textContent = expanded ? "收起 ▴" : "展开全部 215 种 ▾";
-        if (en) en.textContent = expanded ? "Show less ▴" : "Show all 215 ▾";
-      });
-    }
   }
 
   function buildHeroCollage() {
     var host = document.getElementById("heroCollage");
-    if (!host || !allVisitors.length) return;
+    if (!host || !showcaseVisitors.length) return;
     // pick a spread of visually distinct visitors that have art
     var picks = ["aurora", "doublerainbow", "cloud", "sunbeam", "thundercloud", "birds", "halo22", "cirrus"];
     var byId = {};
-    allVisitors.forEach(function (v) {
+    showcaseVisitors.forEach(function (v) {
       byId[v.id] = v;
     });
     var positions = [
@@ -224,13 +203,15 @@
         return r.json();
       })
       .then(function (data) {
-        allVisitors = data.visitors || [];
+        showcaseVisitors = data.visitors || [];
         // update counts
         var setTxt = function (id, n) {
           var el = document.getElementById(id);
           if (el) el.textContent = String(n);
         };
-        setTxt("cnt-all", data.total || allVisitors.length);
+        var showcaseTotal = data.showcaseTotal || showcaseVisitors.length;
+        setTxt("cnt-all", showcaseTotal);
+        setTxt("cnt-all-en", showcaseTotal);
         renderGallery();
         buildHeroCollage();
       })

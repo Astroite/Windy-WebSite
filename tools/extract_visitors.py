@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Extract visitor metadata + copy one representative sprite per visitor.
+"""Extract the public visitor showcase and its representative sprites.
 
 Source: apps/wallpaper/data/visitors.js (generated JSON wrapped in a JS assignment).
 Output:
-  WindyWebSite/assets/visitors/<id>.png   one sprite per visitor
-  WindyWebSite/data/visitors.json         [{id,label,labelEn,rarity}] + rarity meta + counts
+  WindyWebSite/assets/visitors/<id>.png   one sprite per showcased visitor
+  WindyWebSite/data/visitors.json         public showcase metadata + catalogue counts
 """
 import json
 import os
@@ -14,11 +14,21 @@ import shutil
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(HERE)
-WALLPAPER = os.path.normpath(os.path.join(SITE, "..", "WindyWallpaper", "apps", "wallpaper"))
+WALLPAPER = os.path.normpath(os.path.join(SITE, "..", "Windy-WallPaper", "apps", "wallpaper"))
 SRC_JS = os.path.join(WALLPAPER, "data", "visitors.js")
 SPRITE_ROOT = os.path.join(WALLPAPER, "assets", "sprites")
 OUT_SPRITES = os.path.join(SITE, "assets", "visitors")
 OUT_JSON = os.path.join(SITE, "data", "visitors.json")
+
+# Keep the public landing page deliberately spoiler-light: familiar weather first,
+# a small sampling of rarer sights, and only a few epic discoveries.
+SHOWCASE_IDS = (
+    "cloud", "rain", "wind", "cumulus", "cirrus", "nightmist",
+    "fog", "glow", "sunbeam", "birds", "thundercloud", "halo22",
+    "arcuscloud", "lenticular", "sundog", "lightpillar", "fullrainbow",
+    "glory", "iridescentcloud", "meteor", "doublerainbow",
+    "aurora", "redsprite", "noctilucentcloud",
+)
 
 
 def load_data():
@@ -51,14 +61,21 @@ def pick_sprite(v):
 def main():
     data = load_data()
     visitors = data["visitors"]
-    rarities = data["rarities"]
+    visitors_by_id = {v["id"]: v for v in visitors}
+    unknown_ids = [visitor_id for visitor_id in SHOWCASE_IDS if visitor_id not in visitors_by_id]
+    if unknown_ids:
+        raise ValueError("Unknown showcase visitor IDs: " + ", ".join(unknown_ids))
+    showcase = [visitors_by_id[visitor_id] for visitor_id in SHOWCASE_IDS]
     os.makedirs(OUT_SPRITES, exist_ok=True)
     os.makedirs(os.path.dirname(OUT_JSON), exist_ok=True)
 
     out = []
     missing = []
-    counts = {"common": 0, "rare": 0, "epic": 0}
+    catalogue_counts = {"common": 0, "rare": 0, "epic": 0}
+    showcase_counts = {"common": 0, "rare": 0, "epic": 0}
     for v in visitors:
+        catalogue_counts[v["rarity"]] = catalogue_counts.get(v["rarity"], 0) + 1
+    for v in showcase:
         src = pick_sprite(v)
         has_art = bool(src and os.path.exists(src))
         if has_art:
@@ -66,7 +83,7 @@ def main():
             shutil.copyfile(src, dst)
         else:
             missing.append(v["id"])
-        counts[v["rarity"]] = counts.get(v["rarity"], 0) + 1
+        showcase_counts[v["rarity"]] = showcase_counts.get(v["rarity"], 0) + 1
         out.append({
             "id": v["id"],
             "label": v["label"],
@@ -75,20 +92,25 @@ def main():
             "art": ("assets/visitors/" + v["id"] + ".png") if has_art else None,
         })
 
+    selected_files = {visitor_id + ".png" for visitor_id in SHOWCASE_IDS}
+    removed = []
+    for entry in os.scandir(OUT_SPRITES):
+        if entry.is_file() and entry.name.endswith(".png") and entry.name not in selected_files:
+            os.remove(entry.path)
+            removed.append(entry.name)
+
     payload = {
-        "total": len(out),
-        "counts": counts,
-        "rarities": {
-            k: {"label": rarities[k]["label"], "labelEn": rarities[k]["labelEn"]}
-            for k in ("common", "rare", "epic") if k in rarities
-        },
+        "total": len(visitors),
+        "showcaseTotal": len(out),
         "visitors": out,
     }
     with open(OUT_JSON, "w", encoding="utf-8") as fh:
         json.dump(payload, fh, ensure_ascii=False, indent=2)
 
-    print("visitors:", len(out), "counts:", counts)
+    print("catalogue visitors:", len(visitors), "counts:", catalogue_counts)
+    print("showcase visitors:", len(out), "counts:", showcase_counts)
     print("copied sprites:", len(out) - len(missing), "missing:", len(missing))
+    print("removed stale sprites:", len(removed))
     if missing:
         print("missing art for:", ", ".join(missing[:20]))
 
