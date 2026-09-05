@@ -12,7 +12,10 @@
       localStorage.setItem(LANG_KEY, lang);
     } catch (e) {}
     var btn = document.getElementById("langToggle");
-    if (btn) btn.textContent = lang === "zh" ? "EN / 中" : "中 / EN";
+    if (btn) {
+      btn.textContent = lang === "zh" ? "EN / 中" : "中 / EN";
+      btn.setAttribute("aria-label", lang === "zh" ? "Switch to English" : "切换到中文");
+    }
   }
   (function initLang() {
     var saved = null;
@@ -73,7 +76,7 @@
     frame.innerHTML = "";
     var img = new Image();
     img.src = url;
-    img.alt = "Windborne";
+    img.alt = "Windborne paper-cut weather world / 风信来客剪纸天气世界";
     frame.appendChild(img);
   }
 
@@ -99,9 +102,7 @@
 
   function cardHTML(v) {
     var r = RARITY[v.rarity] || RARITY.common;
-    var art = v.art
-      ? '<img src="' + v.art + '" alt="" loading="lazy" />'
-      : '<span style="font-size:34px">✦</span>';
+    var art = v.art ? '<img src="' + v.art + '" alt="" loading="lazy" />' : '<span style="font-size:34px">✦</span>';
     return (
       '<article class="visitor-card ' +
       v.rarity +
@@ -116,7 +117,7 @@
       " / " +
       v.labelEn +
       '">' +
-      '<span data-lang-zh>' +
+      "<span data-lang-zh>" +
       v.label +
       "</span><span data-lang-en>" +
       v.labelEn +
@@ -124,7 +125,7 @@
       '<div class="tier"><span class="dot ' +
       r.dot +
       '"></span>' +
-      '<span data-lang-zh>' +
+      "<span data-lang-zh>" +
       r.zh +
       "</span><span data-lang-en>" +
       r.en +
@@ -230,6 +231,6 @@
   // swap in generated art if present (produced by tools/gen_all_art.py)
   imageExists("assets/art/hero.jpg", injectHeroArt);
   imageExists("assets/art/ranch.jpg", function (u) {
-    injectMedia("ranchMedia", u, "小牧场 / Ranch");
+    injectMedia("ranchMedia", u, "Windborne 当前牧场界面与真实住客 / Current Windborne ranch with real residents");
   });
 })();
